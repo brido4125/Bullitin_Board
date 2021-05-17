@@ -4,7 +4,6 @@ package com.ynuCoding.www.web.dto;
 import com.ynuCoding.www.domain.posts.Posts;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 
 @Getter
 public class PostsResponseDto {
