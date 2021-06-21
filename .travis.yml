@@ -14,6 +14,23 @@ cache:
 
 script: "./gradlew clean build"
 
+
+before_deploy:
+  - zip -r bullitin_board *
+  - mkdir -p deploy
+  - mv bullitin_board.zip deploy/bullitin_board.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis CI에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY #Travis CI에 설정된 값
+    bucket: bullitin-springboot-deploy
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip 파일 접근을 private로 설정
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+
 #CI 로 실행완료시 메일로 알람
 notifications:
   email:
