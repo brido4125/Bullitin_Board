@@ -33,6 +33,20 @@ deploy:
     on:
       all_branches: true
 
+  - provider: codedeploy
+    access_key_id : $AWS_ACCESS_KEY #Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY #Travis CI에 설정된 값
+    bucket: bullitin-springboot-deploy
+    key: bullitin_board.zip
+    bundle_type: zip
+    application: bullitin_board
+    deployment_group: bullitin_borad_group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      all_branches: true
+
+
 #CI 로 실행완료시 메일로 알람
 notifications:
   email:
